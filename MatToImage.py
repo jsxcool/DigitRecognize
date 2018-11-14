@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 ### Matrix to Image
 X = []  # X is a list of pixel matrix
 i = 0
-with open('/home/jiang/Jupyter/allDigit/test.csv') as f:
+with open('/home/jiang/DigitRecognize/test.csv') as f:
 	reader = csv.reader(f)
 	for row in reader:
 		if reader.line_num == 1:
