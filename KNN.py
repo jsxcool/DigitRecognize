@@ -16,7 +16,7 @@ def matrixDistance(x1, x2):
 	return math.sqrt(sum)
 	
 	
-def quickSort(y, len):
+def bubbleSort(y, len):
 	for i in range(len-1):
 		sorted = False
 		for j in range(len-1):
@@ -27,8 +27,9 @@ def quickSort(y, len):
 				sorted = True
 		if sorted == False:
 			break	
-			
-	
+	return ;
+
+
 def identify(x, k):  # k means kNN
 	sum = 0
 	min = 999999999  # just a very big number
@@ -42,19 +43,20 @@ def identify(x, k):  # k means kNN
 			sum = 0
 	return target
 
+
 def KNN(x, k):
 	ls = []   # k elements
-	for i in range(10000000, 10000000+k):
+	for i in range(99999999, 99999999+k):
 		ls.append({i:-1})
 	for i in range(length):
 		distance = matrixDistance(x, X[i])
-		if distance < list(ls[9].keys())[0]:
-			ls[9] = {distance: Y[i]}
-			quickSort(ls, len(ls))
+		if distance < list(ls[k-1].keys())[0]:
+			ls[k-1] = {distance: Y[i]}
+			bubbleSort(ls, len(ls))
 	output = []
 	for ele in ls:
 		output.append(list(ele.values())[0])
-	return statistics.mode(output)
+	return max(output, key=output.count)    # get the mode
 	
 X = []   # 1000 for dataset capacity
 Y = []
@@ -66,32 +68,29 @@ with open('train.csv') as f:
 	for row in reader:
 		if reader.line_num == 1:
 			continue;
-		if i < 999 :
+		if i < 9999 :
 			Y.append(int(row[0]))
 			X.append(np.array(row[1:], dtype=int).reshape(28,28))
 			i += 1
-		if i >= 999 :
+		if i >= 9999 :
 			Y_test.append(int(row[0]))
 			X_test.append(np.array(row[1:], dtype=int).reshape(28,28))
 			i += 1
-		if i > 1299 :
+		if i > 11000 :
 			break;
-
 
 length = len(Y)
 
-'''quickSort(Y, X, 0, length-1)
+for i in range(50,53):
+	print("predict: ", KNN(X_test[i],30), "actual: ", Y_test[i])
 
+
+'''quickSort(Y, X, 0, length-1)
 count = 0
 for i in range(0,200):
 	if identify(X_test[i],10) == Y_test[i]:
 		count += 1
 print(count/200) '''
-
-for i in range(0,20):
-	print(KNN(X_test[i],10), Y_test[i])
-
-
 
 
 
