@@ -30,7 +30,7 @@ X = digits.data
 Y = digits.target
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
-'''
+
 #print(len(Y))
 k = np.arange(1, 50)
 myAccuracy = []
@@ -50,3 +50,4 @@ plt.ylim(0.8, 1)
 plt.xlabel('Digit')
 plt.ylabel('Accuracy')
 plt.show()
+'''
