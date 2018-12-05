@@ -53,7 +53,7 @@ df = DataFrame(x_test)
 df.to_csv('testData.csv')
 '''
 
-# all training data, 1000 total, 1000 each
+# all training data, 10000 total, 1000 each
 count = np.zeros(10)
 x_train = []
 with open('train.csv') as f:

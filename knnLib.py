@@ -68,7 +68,11 @@ myAccuracy2 = []
 for i in range(0, 10): 
 	x , label = loadOneDigit(str(i)+".csv")
 	myAccuracy2.append(accuracy2(x, label))
+	
+fig, ax = plt.subplots()	
 plt.bar(num, myAccuracy2)
+for i, v in zip(range(0, 10), myAccuracy2):
+    ax.text(i-0.25, v, str(v), color='red', fontsize=10)
 plt.ylim(0.8, 1) 
 plt.xlabel('Digit')
 plt.ylabel('Accuracy')
