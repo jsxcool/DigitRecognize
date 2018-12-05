@@ -104,14 +104,14 @@ for ele in gs.grid_scores_:
 print(maxMean, param)
 '''
 
-'''
+
 bestClf = MLPClassifier(activation='logistic', solver = 'adam', alpha=0.001,
 						hidden_layer_sizes=(49), learning_rate = 'constant',
 						learning_rate_init = 0.001, momentum=0.9, tol=0.0001)
 bestClf.fit(x_train, y_train)
-print(bestClf.score(x_test, y_test))  #0.913
-'''
+print(bestClf.predict([x_test[0]]))  #0.913
 
+'''
 # draw digit-disrtibution diagram
 num = np.arange(0, 10)
 myAccuracy2 = []
@@ -127,5 +127,5 @@ plt.ylim(0.8, 1)
 plt.xlabel('Digit')
 plt.ylabel('Accuracy')
 plt.show()
-
+'''
 
