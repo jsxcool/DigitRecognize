@@ -5,11 +5,13 @@ from sklearn.cross_validation import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 import matplotlib.pyplot as plt
 
+# used to find best K-value
 def accuracy(k):
 	clf = KNeighborsClassifier(n_neighbors=k)
 	clf.fit(x_train, y_train)
 	return clf.score(x_test, y_test)
 
+# best clf accuracy
 def accuracy2(x_digit, label):
 	clf = KNeighborsClassifier(n_neighbors=4)
 	clf.fit(x_train, y_train)
@@ -21,6 +23,7 @@ def accuracy2(x_digit, label):
 			right += 1
 	return right/count
 
+# load signle digit dataset
 def loadOneDigit(name):
 	x = []
 	label = int(name[0])
@@ -32,6 +35,7 @@ def loadOneDigit(name):
 			x.append(np.array(row[1:], dtype=int))
 	return x, label
 	
+# load the whole dataset
 def loadData(name):
 	x = []
 	y = []
@@ -47,9 +51,11 @@ def loadData(name):
 x_train, y_train = loadData("trainData.csv")
 x_test, y_test = loadData("testData.csv")
 
+clf = KNeighborsClassifier(n_neighbors=4)
+clf.fit(x_train, y_train)
+print(clf.predict([x_test[0]]))
 
 # draw k-distribution diagram
-'''
 k = np.arange(1, 50)
 myAccuracy = []
 for i in range(1, 50):
@@ -59,7 +65,6 @@ plt.xlabel('num of K')
 plt.ylabel('Accuracy')
 plt.grid(True)
 plt.show()
-'''
 
 
 # draw digit-disrtibution diagram
@@ -77,4 +82,3 @@ plt.ylim(0.8, 1)
 plt.xlabel('Digit')
 plt.ylabel('Accuracy')
 plt.show()
-

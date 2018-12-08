@@ -5,6 +5,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
 
+# load the whole dataset
 def loadData(name):
 	x = []
 	y = []
@@ -16,7 +17,8 @@ def loadData(name):
 			x.append(np.array(row[2:], dtype=int))
 			y.append(int(row[1]))
 	return x, y
-	
+
+# load single digit dataset	
 def loadOneDigit(name):
 	x = []
 	label = int(name[0])
@@ -46,7 +48,7 @@ def accuracyOneLayer(hidden):
 	clf.fit(x_train,y_train)
 	return clf.score(x_test, y_test)
 
-# principle lower > upper
+# principle lower > upper (the unit number of hidden layer)
 def accuracyTwoLayer(lower, upper):
 	clf = MLPClassifier(activation='logistic', hidden_layer_sizes=(lower, upper))
 	clf.fit(x_train,y_train)
@@ -56,7 +58,7 @@ def accuracyTwoLayer(lower, upper):
 x_train, y_train = loadData("trainData.csv")
 x_test, y_test = loadData("testData.csv")
 
-'''
+# draw the diagram of one hidden layer
 acc1 = []
 for i in range(5, 100):
 	acc1.append(accuracyOneLayer(i))
@@ -67,9 +69,9 @@ plt.ylabel('Accuracy')
 plt.title('One-hidden-layer ANN')
 plt.grid(True)
 plt.show()
-'''
 
-'''
+
+# draw the diagram of one hidden layer
 acc2 = []
 for i in range(5, 100):
 	acc2.append(accuracyTwoLayer(i, int(0.333*i)))
@@ -80,9 +82,9 @@ plt.ylabel('Accuracy')
 plt.title('Two-hidden-layer ANN')
 plt.grid(True)
 plt.show()
-'''
 
-'''
+
+# grid search cross validation to get the best parameter
 mlp = MLPClassifier(activation='logistic', solver = 'adam', hidden_layer_sizes=(49))
 param_grid = { #'solver': ['sgd', 'adam'],
               'alpha': [0.0001, 0.001, 0.01],   
@@ -102,8 +104,6 @@ for ele in gs.grid_scores_:
         maxMean = ele[1]
         param = ele[0]
 print(maxMean, param)
-'''
-
 
 bestClf = MLPClassifier(activation='logistic', solver = 'adam', alpha=0.001,
 						hidden_layer_sizes=(49), learning_rate = 'constant',
@@ -111,8 +111,8 @@ bestClf = MLPClassifier(activation='logistic', solver = 'adam', alpha=0.001,
 bestClf.fit(x_train, y_train)
 print(bestClf.predict([x_test[0]]))  #0.913
 
-'''
-# draw digit-disrtibution diagram
+
+# draw digit-disrtibution diagram based on best clf
 num = np.arange(0, 10)
 myAccuracy2 = []
 for i in range(0, 10): 
@@ -127,5 +127,4 @@ plt.ylim(0.8, 1)
 plt.xlabel('Digit')
 plt.ylabel('Accuracy')
 plt.show()
-'''
 
